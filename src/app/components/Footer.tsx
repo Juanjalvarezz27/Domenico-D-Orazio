@@ -12,12 +12,15 @@ export default function Footer() {
         </span>
       </div>
 
-      {/* Firma del Desarrollador (Interactiva) */}
+      {/* Firma del Desarrollador (Responsive) */}
       <div className="mt-12 md:mt-16 px-6 text-center">
-        <p className="font-outfit text-[9px] md:text-[10px] text-stone-500 tracking-[0.2em] md:tracking-[0.3em] uppercase">
-          Desarrollado por Juan Álvarez 
+        {/* Contenedor que cambia de columna (móvil) a fila (desktop) */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-0 font-outfit text-[9px] md:text-[10px] text-stone-500 tracking-[0.2em] md:tracking-[0.3em] uppercase">
           
-          <span className="mx-2 text-stone-300">|</span> 
+          <span>Desarrollado por Juan Álvarez</span>
+          
+          {/* Separador oculto en móvil, visible en PC */}
+          <span className="hidden md:inline mx-2 text-stone-300">|</span> 
           
           <a 
             href="https://wa.me/584129164371" 
@@ -28,7 +31,8 @@ export default function Footer() {
             +58 412 9164371
           </a> 
           
-          <span className="mx-2 text-stone-300">|</span> 
+          {/* Separador oculto en móvil, visible en PC */}
+          <span className="hidden md:inline mx-2 text-stone-300">|</span> 
           
           <a 
             href="https://www.instagram.com/juanjalvarezz/?hl=es" 
@@ -38,7 +42,8 @@ export default function Footer() {
           >
             IG: @Juanjalvarezz
           </a>
-        </p>
+          
+        </div>
       </div>
 
     </footer>
