@@ -1,6 +1,5 @@
 import ServicesHero from "../../components/Services/ServicesHero";
 import ServicesList from "../../components/Services/ServicesList";
-import Link from "next/link";
 
 export default function ServiciosPage() {
   return (
@@ -8,20 +7,46 @@ export default function ServiciosPage() {
       <ServicesHero />
       <ServicesList />
 
-      {/* CTA Final */}
-      <section className="py-32 bg-neutral-950 border-t border-neutral-900">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-syne text-4xl md:text-6xl text-stone-100 mb-12 tracking-tight">
+      {/* Cierre Editorial / Sello de Marca (Mucho más compacto) */}
+      <section className="relative py-16 md:py-24 bg-neutral-950 border-t border-neutral-900 overflow-hidden flex flex-col items-center justify-center antialiased">
+        
+        {/* Monograma de fondo ajustado al nuevo tamaño */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] select-none pointer-events-none">
+          <span className="font-syne text-[12rem] md:text-[20rem] font-bold leading-none tracking-tighter">
+            D'O
+          </span>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          
+          {/* Etiqueta superior con menos margen */}
+          <div className="flex items-center justify-center gap-4 mb-8 md:mb-10">
+            <div className="h-[1px] w-8 md:w-16 bg-stone-800"></div>
+            <span className="font-outfit text-stone-500 text-[10px] tracking-[0.4em] md:tracking-[0.6em] uppercase">
+              La Visión Final
+            </span>
+            <div className="h-[1px] w-8 md:w-16 bg-stone-800"></div>
+          </div>
+
+          {/* Título de impacto */}
+          <h2 className="font-syne text-4xl md:text-6xl lg:text-[6rem] text-stone-100 tracking-tighter leading-[0.9]">
             Diseñemos algo <br />
             <span className="italic font-light text-stone-500">extraordinario.</span>
           </h2>
           
-          <Link 
-            href="/home/contacto"
-            className="inline-block px-12 py-5 border border-stone-700 text-stone-200 font-outfit text-xs tracking-widest uppercase hover:bg-stone-100 hover:text-neutral-950 transition-all duration-500"
-          >
-            Reservar Consulta Inicial
-          </Link>
+          {/* Firma de Autor pegada al texto */}
+          <div className="flex flex-col items-center justify-center mt-12 md:mt-16">
+            {/* Línea vertical más corta y sutil */}
+            <div className="w-px h-10 md:h-16 bg-gradient-to-b from-stone-700 to-transparent mb-6"></div>
+            
+            <p className="font-syne text-stone-300 text-xs md:text-sm tracking-[0.4em] uppercase mb-2">
+              Domenico D'Orazio
+            </p>
+            <p className="font-outfit text-stone-600 text-[9px] tracking-[0.3em] uppercase">
+              Certified Event & Wedding Planner
+            </p>
+          </div>
+
         </div>
       </section>
     </main>
