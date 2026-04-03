@@ -3,8 +3,6 @@ import Navbar from "./components/Navbar";
 export default function Home() {
   return (
     <main className="min-h-screen bg-stone-50">
-      {/* 1. Barra de Navegación */}
-      <Navbar />
 
       {/* 2. Hero Section (Inicio) */}
       <section id="home" className="relative h-[80vh] bg-neutral-900 flex items-center justify-center overflow-hidden">
