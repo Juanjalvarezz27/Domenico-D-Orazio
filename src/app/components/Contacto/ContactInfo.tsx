@@ -31,7 +31,7 @@ export default function ContactInfo() {
   ];
 
   return (
-    <section className="relative w-full py-24 md:py-32 px-4 md:px-6 bg-stone-50 overflow-hidden">
+    <section className="relative w-full py-8 md:py-8 px-4 md:px-8 bg-stone-50 overflow-hidden">
       <div className="max-w-6xl mx-auto w-full">
         
         {/* --- EL DIRECTORIO CENTRADO --- */}
@@ -92,7 +92,7 @@ export default function ContactInfo() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           // Fondo más elegante con bordes refinados
-          className="mt-24 md:mt-40 relative w-full overflow-hidden bg-white/50 backdrop-blur-sm border border-stone-200/60 flex flex-col items-center justify-center text-center py-20 md:py-32 shadow-sm rounded-sm"
+          className="mt-12 md:mt-20 relative w-full overflow-hidden bg-white/50 backdrop-blur-sm border border-stone-200/60 flex flex-col items-center justify-center text-center py-20 md:py-32 shadow-sm rounded-sm"
         >
           {/* Marca de agua de fondo gigante - Ajustada para no desbordar (overflow-hidden en el padre) */}
           <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none select-none">
