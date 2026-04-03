@@ -94,14 +94,6 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          {/* Botón móvil en blanco y negro */}
-          <Link
-            href="/home/contacto"
-            onClick={closeMenu}
-            className="mt-8 font-outfit text-sm font-bold tracking-[0.2em] text-neutral-900 bg-white px-12 py-4 rounded-none"
-          >
-            CONTACTAR
-          </Link>
         </div>
       </div>
     </nav>

@@ -1,12 +1,16 @@
-import Navbar from "../../components/Navbar";
+import ContactHero from "../../components/Contacto/ContactHero";
+import ContactInfo from "../../components/Contacto/ContactInfo";
 
-export default function Contacto() {
+export default function ContactoPage() {
   return (
-    <main className="min-h-screen bg-stone-50">
-      <section className="pt-32 px-6 max-w-7xl mx-auto text-center">
-        <h1 className="font-syne text-5xl text-neutral-900 mb-6">Contacto</h1>
-        <p className="font-outfit text-neutral-600">Botón a WhatsApp e información de contacto.</p>
-      </section>
+    <main className="flex flex-col bg-stone-50 min-h-screen text-neutral-900 selection:bg-stone-200 selection:text-stone-900">
+      
+      {/* Encabezado Oscuro de Contacto */}
+      <ContactHero />
+
+      {/* Directorio de Información */}
+      <ContactInfo />
+
     </main>
   );
 }
