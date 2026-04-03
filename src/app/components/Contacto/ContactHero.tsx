@@ -25,28 +25,28 @@ export default function ContactHero() {
   };
 
   return (
-    <section className="relative min-h-[85vh] pt-36 pb-16 md:pt-32 w-full flex flex-col items-center justify-center text-center overflow-hidden bg-neutral-950 antialiased">
+    // La sección DEBE ser relative. Añadimos 'isolate' para crear un nuevo contexto de apilamiento limpio.
+    <section className="relative isolate min-h-[85vh] pt-36 pb-16 md:pt-32 w-full flex flex-col items-center justify-center text-center overflow-hidden bg-neutral-950 antialiased">
       
       {/* --- CAPA DE FONDO --- */}
       <motion.div 
-        initial={{ scale: 1.05 }} // Optimizado: menos exigencia inicial
+        initial={{ scale: 1.05 }}
         animate={{ scale: 1 }}
         transition={{ duration: 2.5, ease: "easeOut" }}
-        // OPTIMIZACIÓN CLAVE: will-change-transform fuerza el uso de la GPU
         className="absolute inset-0 z-0 will-change-transform"
       >
-        <div className="w-full h-full bg-neutral-900 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-80"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/20 via-neutral-950/60 to-neutral-950/90"></div>
+        {/* Usamos un div con absolute y full para la textura */}
+        <div className="absolute inset-0 bg-neutral-900 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/20 via-neutral-950/60 to-neutral-950/90" />
         
-        {/* IMAGEN Phone.png: Movimiento optimizado y acelerado por hardware */}
+        {/* IMAGEN Phone.png */}
         <motion.div
           className="absolute top-[10vh] -left-24 md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-[450px] h-[550px] md:w-full md:h-full max-w-none md:max-w-2xl pointer-events-none will-change-transform"
           initial={{ opacity: 0 }}
           animate={{ 
             opacity: 0.15, 
-            y: ["-2%", "2%", "-2%"], // Movimiento más corto y eficiente
-            rotate: [-1.5, 1.5, -1.5] // Rotación más suave para evitar cortes dentados (aliasing)
-            // Eliminamos la escala infinita para salvar ciclos de GPU
+            y: ["-2%", "2%", "-2%"],
+            rotate: [-1.5, 1.5, -1.5]
           }}
           transition={{
             opacity: { duration: 2, ease: "easeOut" },
@@ -66,6 +66,7 @@ export default function ContactHero() {
       </motion.div>
 
       {/* --- CAPA DE CONTENIDO --- */}
+      {/* Nos aseguramos de que este contenedor sea relativo también */}
       <motion.div 
         variants={containerVariants}
         initial="hidden"
@@ -74,7 +75,6 @@ export default function ContactHero() {
       >
         <motion.div 
           variants={itemVariants}
-          // Cambié backdrop-blur por un fondo semi-transparente simple (el blur también consume recursos en scroll)
           className="border border-stone-400 rounded-full px-8 py-2.5 mb-8 md:mb-10 shadow-sm bg-neutral-950/40"
         >
           <span className="font-outfit text-white font-medium tracking-[0.4em] uppercase text-[10px] md:text-xs">
@@ -90,6 +90,7 @@ export default function ContactHero() {
           <span className="italic font-light text-stone-300 block mt-1 md:inline md:mt-0">próximo evento</span>
         </motion.h1>
 
+        {/* Separador */}
         <motion.div 
           variants={{
             hidden: { width: 0, opacity: 0 },
