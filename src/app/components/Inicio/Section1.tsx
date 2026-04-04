@@ -41,7 +41,6 @@ export default function Section1() {
         animate="show"
         className="relative z-20 flex flex-col items-center mt-[-5%] px-6 w-full max-w-5xl"
       >
-        {/* Cambiado a Stone-400 */}
         <motion.h2 
           variants={itemVariants}
           className="font-outfit text-stone-400 tracking-[0.4em] md:tracking-[0.6em] uppercase text-[10px] md:text-xs mb-8 md:mb-10"
@@ -49,13 +48,16 @@ export default function Section1() {
           Wedding & Event Planner
         </motion.h2>
 
+        {/* --- TÍTULO PRINCIPAL CON SYNCOPATE (EFECTO EXTENDED) --- */}
         <motion.h1 
           variants={itemVariants}
-          className="font-syne text-6xl md:text-8xl lg:text-[10rem] text-white mb-6 md:mb-8 leading-[0.9] drop-shadow-2xl w-full"
+          // Convertimos el h1 en flex-col para apilar los nombres automáticamente
+          className="font-syncopate flex flex-col text-4xl md:text-7xl lg:text-[8rem] text-stone-100 mb-6 md:mb-8 leading-[1.1] md:leading-[0.9] drop-shadow-2xl w-full uppercase"
         >
-          Domenico <br className="md:hidden" />
-          {/* El italic ahora es un gris muy claro en vez de ámbar */}
-          <span className="italic font-light text-stone-300">D'Orazio</span>
+          {/* Nombre Grueso */}
+          <span className="font-bold tracking-tight">Domenico</span>
+          {/* Apellido Fino y ligeramente más gris para contraste */}
+          <span className="font-normal tracking-wider text-stone-300">D'Orazio</span>
         </motion.h1>
 
         {/* Línea divisoria en gris cálido */}

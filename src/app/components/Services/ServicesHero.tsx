@@ -53,7 +53,7 @@ export default function ServicesHero() {
         }}
       >
         <Image 
-          src="/Service.png" 
+          src="/Domen.png" 
           alt="Atmósfera de Servicios" 
           fill 
           priority
@@ -96,7 +96,7 @@ export default function ServicesHero() {
       {/* --- CAPA 4: CONTENIDO PRINCIPAL --- */}
       <div className="max-w-6xl mx-auto w-full px-6 relative z-20 flex flex-col items-center">
         
-        {/* Etiqueta superior mejorada (Syne + Centrado absoluto) */}
+        {/* Etiqueta superior mejorada */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,14 +104,15 @@ export default function ServicesHero() {
           className="flex items-center justify-center w-full gap-4 md:gap-6 mb-10"
         >
           <div className="w-8 md:w-16 h-[1px] bg-stone-500/50"></div>
+          {/* Mantenemos Syne aquí para detalles pequeños, contrasta bien con Syncopate */}
           <span className="font-syne text-stone-300 tracking-[0.3em] md:tracking-[0.4em] uppercase text-[10px] md:text-xs text-center">
             Portafolio de Excelencia
           </span>
           <div className="w-8 md:w-16 h-[1px] bg-stone-500/50"></div>
         </motion.div>
 
-        {/* Títulos */}
-        <div className="text-center flex flex-col items-center">
+        {/* Títulos con Syncopate */}
+        <div className="text-center flex flex-col items-center uppercase">
           
           <div className="overflow-hidden px-4 pb-4 -mb-4">
             <motion.h1
@@ -119,7 +120,8 @@ export default function ServicesHero() {
               initial="hidden"
               animate="visible"
               variants={textRevealVariants}
-              className="font-syne text-7xl md:text-9xl lg:text-[10rem] text-stone-100 tracking-tighter leading-none"
+              // Aplicamos font-syncopate y ajustamos tamaños (es más ancha que Syne)
+              className="font-syncopate font-bold text-5xl md:text-7xl lg:text-[7rem] text-stone-100 tracking-tighter leading-none"
             >
               Mis
             </motion.h1>
@@ -131,7 +133,8 @@ export default function ServicesHero() {
               initial="hidden"
               animate="visible"
               variants={textRevealVariants}
-              className="font-syne text-7xl md:text-9xl lg:text-[10rem] text-stone-400 tracking-tighter leading-[1.1] font-light italic pr-6"
+              // font-normal y text-stone-400 para crear el contraste "Domenico D'Orazio"
+              className="font-syncopate font-normal text-4xl md:text-6xl lg:text-[6rem] text-stone-400 tracking-wide leading-[1.1] pr-6"
             >
               Servicios
             </motion.h1>

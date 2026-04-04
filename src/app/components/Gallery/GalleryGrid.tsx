@@ -10,6 +10,8 @@ const projects = [
   { id: 4, title: "Lanzamiento Aura", category: "Corporate", aspect: "aspect-[4/3]", span: "md:col-span-8 md:row-span-2" },
   { id: 5, title: "Boda Villa Momboy", category: "Weddings", aspect: "aspect-[3/4]", span: "md:col-span-4 md:row-span-2" },
   { id: 6, title: "Bautizo Laurent", category: "Social", aspect: "aspect-square", span: "md:col-span-4 md:row-span-1" },
+  // AÑADIDA: Imagen 7 para cerrar el hueco de la cuadrícula
+  { id: 7, title: "Editorial Novias", category: "Weddings", aspect: "aspect-[4/3]", span: "md:col-span-4 md:row-span-1" },
 ];
 
 export default function GalleryGrid() {
@@ -32,7 +34,7 @@ export default function GalleryGrid() {
               <div className="absolute inset-0 bg-neutral-900 border border-neutral-800 group-hover:scale-105 transition-transform duration-[1.5s] ease-out flex items-center justify-center">
                 {/* Textura de rayas para el placeholder */}
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/pinstripe.png')] opacity-[0.05]"></div>
-                <span className="font-syne text-neutral-700 text-xs tracking-widest uppercase italic">
+                <span className="font-syne text-neutral-700 text-xs tracking-widest uppercase italic text-center px-4">
                   {project.category} Image
                 </span>
               </div>

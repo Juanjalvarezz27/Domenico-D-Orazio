@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image"; // IMPORTANTE: Importamos Image de Next.js
 
 interface Particle {
   id: number;
@@ -19,21 +20,26 @@ const services = [
     subtitle: "Bodas de Autor",
     desc: "Especialización en bodas de playa, ciudad y destino. Nos encargamos de cada detalle, desde la permisología legal hasta la curaduría estética, garantizando una ejecución impecable.",
     tag: "WEDDINGS",
-    imgTags: ["Ceremonia", "Detalles", "Recepción"]
+    imgTags: ["Ceremonia", "Detalles", "Recepción"],
+    // Array para rutas de imágenes (null si aún no hay imagen real)
+    images: [null, null, null] 
   },
   {
     title: "Social Celebrations",
     subtitle: "Momentos Íntimos",
     desc: "Eventos privados exclusivos y fiestas temáticas de alto nivel. 15 años, bautizos y comuniones diseñados bajo una narrativa sensorial única.",
     tag: "SOCIAL",
-    imgTags: ["Celebración", "Atmosfera", "Diseño"]
+    imgTags: ["Celebración", "Atmosfera", "Diseño"],
+    images: [null, null, null]
   },
   {
     title: "Corporate Events",
     subtitle: "Branding & Experiencia",
     desc: "Producción de eventos de marca, lanzamientos de productos y activaciones comerciales que conectan con la audiencia a través del neuromarketing.",
     tag: "CORPORATE",
-    imgTags: ["Lanzamiento", "Activación", "Marca"]
+    imgTags: ["Lanzamiento", "Activación", "Marca"],
+    // AQUÍ ESTÁ EL CAMBIO: La primera imagen de esta sección apunta a "/Lanzamiento.png"
+    images: ["/Lanzamiento.png", null, null] 
   }
 ];
 
@@ -44,7 +50,6 @@ export default function ServicesList() {
   // Generación ULTRA MASIVA de partículas para textura profunda
   useEffect(() => {
     const generated = Array.from({ length: 350 }).map((_, i) => {
-      // 3 tamaños diferentes para crear profundidad de campo
       const sizeClass = Math.random();
       const baseSize = sizeClass > 0.8 ? 2.5 : sizeClass > 0.4 ? 1.5 : 0.8;
       
@@ -53,10 +58,8 @@ export default function ServicesList() {
         size: baseSize, 
         x: Math.random() * 100,
         y: Math.random() * 100,
-        // Las más grandes se mueven más rápido (ilusión de cercanía)
         duration: baseSize > 2 ? Math.random() * 15 + 10 : Math.random() * 30 + 20,
-        delay: Math.random() * -30, // Delay muy negativo para presencia inmediata total
-        // Diferentes opacidades base
+        delay: Math.random() * -30,
         opacity: sizeClass > 0.8 ? 0.3 : 0.15,
       };
     });
@@ -78,10 +81,10 @@ export default function ServicesList() {
               height: p.size, 
               left: `${p.x}%`, 
               top: `${p.y}%`,
-              opacity: p.opacity // Opacidad variable por partícula
+              opacity: p.opacity
             }}
             animate={{
-              y: [0, p.size > 2 ? -60 : -30, 0], // Movimiento más amplio según tamaño
+              y: [0, p.size > 2 ? -60 : -30, 0],
               x: [0, p.size > 2 ? 20 : 10, 0],
               opacity: [p.opacity * 0.5, p.opacity * 1.5, p.opacity * 0.5]
             }}
@@ -93,7 +96,6 @@ export default function ServicesList() {
             }}
           />
         ))}
-        {/* Gradiente sutil para que las partículas se difuminen un poco en los bordes */}
         <div className="absolute inset-0 bg-gradient-to-b from-stone-50/40 via-transparent to-stone-50/40 z-10" />
       </div>
 
@@ -147,40 +149,68 @@ export default function ServicesList() {
 
                 {/* --- MOSAICO DE IMÁGENES --- */}
                 <div className="w-full lg:w-7/12 relative">
-                  {/* Sombra sutil detrás del bloque entero de fotos para separarlas del fondo de partículas */}
                   <div className="absolute inset-[-20px] bg-stone-50/40 backdrop-blur-[2px] rounded-3xl -z-10 hidden md:block"></div>
                   
                   <div className="grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-2 relative z-0">
                     
-                    {/* Imagen Principal */}
+                    {/* Imagen Principal (Índice 0) */}
                     <motion.div 
                       whileHover={{ scale: 0.98 }}
-                      className="col-span-2 lg:col-span-1 lg:row-span-2 relative aspect-[16/10] lg:aspect-[3/4] bg-white border border-stone-200 overflow-hidden shadow-md flex items-center justify-center"
+                      className="col-span-2 lg:col-span-1 lg:row-span-2 relative aspect-[16/10] lg:aspect-[3/4] bg-white border border-stone-200 overflow-hidden shadow-md flex items-center justify-center group/img"
                     >
-                      <div className="absolute inset-0 bg-stone-100/30 opacity-50"></div>
-                      <span className="font-syne text-stone-400 text-xs tracking-[0.3em] uppercase italic z-10">
-                        {service.imgTags[0]}
-                      </span>
+                      {service.images[0] ? (
+                        <Image 
+                          src={service.images[0]} 
+                          alt={service.imgTags[0]} 
+                          fill 
+                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700" 
+                        />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-stone-100/30 opacity-50"></div>
+                          <span className="font-syne text-stone-400 text-xs tracking-[0.3em] uppercase italic z-10">
+                            {service.imgTags[0]}
+                          </span>
+                        </>
+                      )}
                     </motion.div>
 
-                    {/* Imagen Secundaria 1 */}
+                    {/* Imagen Secundaria 1 (Índice 1) */}
                     <motion.div 
                       whileHover={{ scale: 0.98 }}
-                      className="col-span-1 relative aspect-square lg:aspect-square bg-stone-100 border border-stone-200 overflow-hidden shadow-sm flex items-center justify-center"
+                      className="col-span-1 relative aspect-square lg:aspect-square bg-stone-100 border border-stone-200 overflow-hidden shadow-sm flex items-center justify-center group/img"
                     >
-                      <span className="font-syne text-stone-500 text-[10px] tracking-[0.2em] uppercase italic text-center px-2">
-                        {service.imgTags[1]}
-                      </span>
+                      {service.images[1] ? (
+                        <Image 
+                          src={service.images[1]} 
+                          alt={service.imgTags[1]} 
+                          fill 
+                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700" 
+                        />
+                      ) : (
+                        <span className="font-syne text-stone-500 text-[10px] tracking-[0.2em] uppercase italic text-center px-2">
+                          {service.imgTags[1]}
+                        </span>
+                      )}
                     </motion.div>
 
-                    {/* Imagen Secundaria 2 */}
+                    {/* Imagen Secundaria 2 (Índice 2) */}
                     <motion.div 
                       whileHover={{ scale: 0.98 }}
-                      className="col-span-1 relative aspect-square lg:aspect-[4/3] bg-stone-100 border border-stone-200 overflow-hidden shadow-sm flex items-center justify-center"
+                      className="col-span-1 relative aspect-square lg:aspect-[4/3] bg-stone-100 border border-stone-200 overflow-hidden shadow-sm flex items-center justify-center group/img"
                     >
-                      <span className="font-syne text-stone-500 text-[10px] tracking-[0.2em] uppercase italic text-center px-2">
-                        {service.imgTags[2]}
-                      </span>
+                      {service.images[2] ? (
+                        <Image 
+                          src={service.images[2]} 
+                          alt={service.imgTags[2]} 
+                          fill 
+                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700" 
+                        />
+                      ) : (
+                        <span className="font-syne text-stone-500 text-[10px] tracking-[0.2em] uppercase italic text-center px-2">
+                          {service.imgTags[2]}
+                        </span>
+                      )}
                     </motion.div>
 
                   </div>

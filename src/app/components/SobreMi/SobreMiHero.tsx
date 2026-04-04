@@ -51,7 +51,7 @@ export default function SobreMiHero() {
   return (
     <section className="relative pt-12 md:pt-24 pb-10 md:pb-16 w-full flex flex-col items-center bg-stone-50 overflow-hidden antialiased">
       
-      {/* --- CAPA DE PARTÍCULAS: Solo se renderiza cuando el cliente está listo --- */}
+      {/* --- CAPA DE PARTÍCULAS --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {mounted && particles.map((p) => (
           <motion.div
@@ -94,12 +94,12 @@ export default function SobreMiHero() {
         </motion.div>
 
         {/* --- LAYOUT: FOTO + TEXTO --- */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 mb-16">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 mb-16 w-full">
           
           {/* FOTO CIRCULAR */}
           <motion.div 
             variants={itemVariants}
-            className="w-56 h-56 md:w-[320px] md:h-[320px] rounded-full border border-stone-200 bg-white shadow-sm flex items-center justify-center overflow-hidden relative"
+            className="w-56 h-56 md:w-[320px] md:h-[320px] rounded-full border border-stone-200 bg-white shadow-sm flex items-center justify-center overflow-hidden relative shrink-0"
           >
             <div className="absolute inset-0 bg-stone-100 opacity-40"></div>
             <span className="font-syne text-stone-300 text-[10px] md:text-xs tracking-[0.3em] uppercase italic text-center p-8 z-10">
@@ -107,14 +107,14 @@ export default function SobreMiHero() {
             </span>
           </motion.div>
 
-          {/* TEXTO DE MARCA */}
-          <motion.div variants={itemVariants} className="text-center md:text-left">
-            <h1 className="font-syne text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] text-stone-800 leading-[0.9] tracking-tighter">
-              Domenico <br />
-              <span className="italic font-light text-stone-400">D'Orazio</span>
+          {/* TEXTO DE MARCA CON SYNCOPATE */}
+          <motion.div variants={itemVariants} className="text-center lg:text-left flex flex-col items-center lg:items-start">
+            <h1 className="font-syncopate flex flex-col text-3xl sm:text-5xl md:text-6xl lg:text-[5rem] text-stone-800 leading-[1.2] lg:leading-[1.1] uppercase tracking-tight">
+              <span className="font-bold">Domenico</span>
+              <span className="font-normal text-stone-400 tracking-wider">D'Orazio</span>
             </h1>
             
-            <div className="h-[1px] w-16 bg-stone-300 mt-8 mb-8 mx-auto md:mx-0" />
+            <div className="h-[1px] w-16 bg-stone-300 mt-8 mb-8" />
             
             <p className="font-outfit text-stone-500 text-xs md:text-sm tracking-[0.4em] uppercase font-medium">
               Event & Wedding Planner
