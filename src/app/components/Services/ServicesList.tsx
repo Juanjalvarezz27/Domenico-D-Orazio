@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Image from "next/image"; // IMPORTANTE: Importamos Image de Next.js
+import Image from "next/image";
 
 interface Particle {
   id: number;
@@ -21,7 +21,6 @@ const services = [
     desc: "Especialización en bodas de playa, ciudad y destino. Nos encargamos de cada detalle, desde la permisología legal hasta la curaduría estética, garantizando una ejecución impecable.",
     tag: "WEDDINGS",
     imgTags: ["Ceremonia", "Detalles", "Recepción"],
-    // Array para rutas de imágenes (null si aún no hay imagen real)
     images: [null, null, null] 
   },
   {
@@ -38,7 +37,6 @@ const services = [
     desc: "Producción de eventos de marca, lanzamientos de productos y activaciones comerciales que conectan con la audiencia a través del neuromarketing.",
     tag: "CORPORATE",
     imgTags: ["Lanzamiento", "Activación", "Marca"],
-    // AQUÍ ESTÁ EL CAMBIO: La primera imagen de esta sección apunta a "/Lanzamiento.png"
     images: ["/Lanzamiento.png", null, null] 
   }
 ];
@@ -81,7 +79,7 @@ export default function ServicesList() {
               height: p.size, 
               left: `${p.x}%`, 
               top: `${p.y}%`,
-              opacity: p.opacity
+              opacity: p.opacity 
             }}
             animate={{
               y: [0, p.size > 2 ? -60 : -30, 0],
@@ -156,7 +154,8 @@ export default function ServicesList() {
                     {/* Imagen Principal (Índice 0) */}
                     <motion.div 
                       whileHover={{ scale: 0.98 }}
-                      className="col-span-2 lg:col-span-1 lg:row-span-2 relative aspect-[16/10] lg:aspect-[3/4] bg-white border border-stone-200 overflow-hidden shadow-md flex items-center justify-center group/img"
+                      // CORRECCIÓN APLICADA AQUÍ: aspect-[4/5] para móvil, lg:aspect-[3/4] para escritorio
+                      className="col-span-2 lg:col-span-1 lg:row-span-2 relative aspect-[4/5] lg:aspect-[3/4] bg-white border border-stone-200 overflow-hidden shadow-md flex items-center justify-center group/img"
                     >
                       {service.images[0] ? (
                         <Image 
