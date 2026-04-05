@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image"; // IMPORTANTE: Agregamos el componente Image
 
 interface Particle {
   id: number;
@@ -29,27 +30,31 @@ export default function SobreMiDetalles() {
     setMounted(true);
   }, []);
 
+  // Agregamos imgSrc a cada sección apuntando a tu carpeta public/sobremi
   const secciones = [
     {
       id: "01",
       titulo: "Experiencia & Visión",
       desc: "Event and Wedding planner certificado con más de 6 años transformando visiones en experiencias impecables, desde bodas íntimas hasta grandes eventos corporativos.",
       imgTag: "Creative Director",
-      align: "left"
+      align: "left",
+      imgSrc: "/sobremi/1.jpg" // Ruta de tu imagen
     },
     {
       id: "02",
       titulo: "Seguridad Jurídica",
       desc: "Abogado de profesión. Mi ventaja competitiva es garantizarte una gestión legal absoluta en contratos y permisología, protegiendo tu inversión en cada firma.",
       imgTag: "Legal Advisor",
-      align: "right"
+      align: "right",
+      imgSrc: "/sobremi/2.jpg" // Ruta de tu imagen
     },
     {
       id: "03",
       titulo: "Neuromarketing",
       desc: "Diseño a través de los sentidos. Creo atmósferas sensoriales que conectan emocionalmente con cada invitado, logrando que tu evento trascienda en el tiempo.",
       imgTag: "Sensory Design",
-      align: "left"
+      align: "left",
+      imgSrc: "/sobremi/3.jpg" // Ruta de tu imagen
     }
   ];
 
@@ -104,31 +109,45 @@ export default function SobreMiDetalles() {
         {/* CONTENEDOR DE SECCIONES CON LÍNEA CENTRAL CORREGIDA */}
         <div className="max-w-6xl mx-auto px-6 relative">
           
-          {/* CORRECCIÓN: Línea vertical central visible pero elegante */}
+          {/* Línea vertical central visible pero elegante */}
           <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[1px] bg-neutral-800/50 hidden md:block transform md:-translate-x-1/2 z-0" />
 
           <div className="space-y-24 md:space-y-40 relative z-10">
             {secciones.map((sec) => (
               <div 
                 key={sec.id}
-                className={`flex flex-col ${sec.align === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-20 relative`}
+                // Agregamos 'group' aquí para que el hover afecte tanto al texto como a la imagen
+                className={`flex flex-col ${sec.align === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-20 relative group`}
               >
-                {/* IMAGEN */}
+                
+                {/* --- IMAGEN CON NEXT/IMAGE --- */}
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 1 }}
-                  className="w-full md:w-[40%] aspect-[4/5] bg-neutral-900/50 backdrop-blur-sm relative group shadow-2xl overflow-hidden border border-neutral-800"
+                  className="w-full md:w-[40%] aspect-[4/5] bg-neutral-900 relative shadow-2xl overflow-hidden border border-neutral-800"
                 >
-                  <div className="absolute inset-0 flex items-center justify-center m-6 border border-neutral-800/60 transition-colors duration-500 group-hover:border-stone-700/40">
-                    <span className="font-syne text-stone-700 text-[9px] tracking-[0.4em] uppercase italic group-hover:text-stone-500 transition-colors duration-500">
+                  <Image 
+                    src={sec.imgSrc}
+                    alt={`Representación de ${sec.titulo}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    className="object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.5s] ease-out"
+                  />
+                  
+                  {/* Capa de oscurecimiento para no desentonar con el fondo dark (se aclara en hover) */}
+                  <div className="absolute inset-0 bg-neutral-950/30 pointer-events-none transition-opacity duration-700 group-hover:opacity-10"></div>
+
+                  {/* Etiqueta flotante */}
+                  <div className="absolute bottom-6 left-6 border border-white/20 bg-neutral-950/40 backdrop-blur-md px-4 py-2 transition-all duration-500 group-hover:bg-neutral-950/60 group-hover:border-white/40">
+                    <span className="font-syne text-stone-200 text-[9px] tracking-[0.4em] uppercase italic drop-shadow-lg">
                       {sec.imgTag}
                     </span>
                   </div>
                 </motion.div>
 
-                {/* TEXTO */}
+                {/* --- TEXTO --- */}
                 <motion.div 
                   initial={{ opacity: 0, x: sec.align === 'left' ? 15 : -15 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -137,7 +156,7 @@ export default function SobreMiDetalles() {
                   className="w-full md:w-[50%] flex flex-col relative"
                 >
                   {/* Número decorativo sutil */}
-                  <span className="absolute -top-12 -left-4 md:-left-10 font-syne text-7xl md:text-9xl text-white/[0.1] font-bold leading-none select-none z-0">
+                  <span className="absolute -top-12 -left-4 md:-left-10 font-syne text-7xl md:text-9xl text-white/[0.05] font-bold leading-none select-none z-0 transition-colors duration-500 group-hover:text-white/[0.1]">
                     {sec.id}
                   </span>
 
@@ -145,14 +164,14 @@ export default function SobreMiDetalles() {
                     <h3 className="font-syne text-2xl md:text-4xl text-stone-200 mb-5 tracking-tight font-medium">
                       {sec.titulo}
                     </h3>
-                    <p className="font-outfit text-stone-400 text-base md:text-xl leading-relaxed font-light max-w-sm">
+                    <p className="font-outfit text-stone-400 text-base md:text-xl leading-relaxed font-light max-w-sm transition-colors duration-500 group-hover:text-stone-300">
                       {sec.desc}
                     </p>
                     
-                    {/* CORRECCIÓN: Calidad de marca más discreta */}
-                    <div className="mt-8 flex items-center gap-3">
-                      <div className="h-[1px] w-6 bg-neutral-500"></div>
-                      <span className="font-outfit text-[9px] tracking-[0.2em] uppercase text-stone-100">
+                    {/* Calidad de marca más discreta */}
+                    <div className="mt-8 flex items-center gap-3 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="h-[1px] w-6 bg-stone-500"></div>
+                      <span className="font-outfit text-[9px] tracking-[0.2em] uppercase text-stone-200">
                         D'Orazio Quality
                       </span>
                     </div>
