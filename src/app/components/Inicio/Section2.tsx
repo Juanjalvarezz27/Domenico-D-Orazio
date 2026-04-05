@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import Image from "next/image"; // Importamos Image de Next.js
+import Image from "next/image";
 
 export default function Section2() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -40,28 +40,27 @@ export default function Section2() {
   const scale = useTransform(smoothProgress, [0, 0.5, 1], [0.8, 1.2, 0.8]);
   const rotate = useTransform(smoothProgress, [0, 1], [0, 180]);
 
-  // Modificamos las fases para incluir la ruta a las imágenes
   const fases = [
     {
       num: "1",
       titulo: "Consulta Inicial",
       desc: "Nos reuniremos, y así podré entender tu visión, y con mi ayuda volverla realidad.",
       imgMargin: "md:ml-auto",
-      imgSrc: "/Inicio/1.jpg", // Ruta a tu primera imagen
+      imgSrc: "/Inicio/A1.jpg", 
     },
     {
       num: "2",
       titulo: "Planificación y Diseño",
       desc: "Desarrollaremos el concepto creativo, y toda la logística técnica de tu evento.",
       imgMargin: "md:mr-auto",
-      imgSrc: "/Inicio/2.jpg", // Ruta a tu segunda imagen
+      imgSrc: "/Inicio/2.jpg", 
     },
     {
       num: "3",
       titulo: "Coordinación del Evento",
       desc: "Gestión total del evento, para que tú solo te dediques a disfrutar de ese día inolvidable.",
       imgMargin: "md:ml-auto",
-      imgSrc: "/Inicio/3.jpg", // Ruta a tu tercera imagen
+      imgSrc: "/Inicio/3.jpg", 
     },
   ];
 
@@ -77,7 +76,6 @@ export default function Section2() {
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-28 md:mb-40 relative flex flex-col items-center px-4"
         >
-          {/* Título Monumental de Fondo */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[70px] md:text-[140px] font-syne font-bold text-stone-200/40 pointer-events-none z-[-1] tracking-widest whitespace-nowrap">
             JOURNEY
           </div>
@@ -103,16 +101,13 @@ export default function Section2() {
         {/* TIMELINE */}
         <div className="relative w-full pl-24 md:pl-0" ref={containerRef}>
           
-          {/* LÍNEA VERTICAL (El Hilo Conductor) */}
           <div className="absolute top-0 bottom-0 left-[4.5rem] md:left-1/2 w-[1px] bg-gradient-to-b from-transparent via-stone-300 to-transparent transform md:-translate-x-1/2 z-0">
-            {/* Rastro brillante sobre la línea */}
             <motion.div 
               className="w-full bg-stone-600 opacity-30 shadow-[0_0_8px_rgba(87,83,78,0.5)]"
               style={{ height: topPosition }}
             />
           </div>
 
-          {/* 📍 EL "PIN" GEOMÉTRICO (Móvil) */}
           <motion.div
             className="md:hidden absolute left-[4.5rem] w-12 h-12 -ml-6 z-50 pointer-events-none flex items-center justify-center will-change-transform"
             style={{ top: topPosition, x: xMobile, scale, rotate }}
@@ -121,7 +116,6 @@ export default function Section2() {
             <div className="absolute inset-0 border border-stone-400/30 rotate-45 rounded-sm"></div>
           </motion.div>
 
-          {/* 📍 EL "PIN" GEOMÉTRICO (Desktop) */}
           <motion.div
             className="hidden md:flex absolute left-1/2 w-16 h-16 -ml-8 z-50 pointer-events-none items-center justify-center will-change-transform"
             style={{ top: topPosition, x: xDesktop, scale, rotate }}
@@ -138,10 +132,8 @@ export default function Section2() {
               return (
                 <div
                   key={fase.num}
-                  // Añadimos 'group' aquí para que el hover funcione sobre toda la fila
                   className="relative flex flex-col md:flex-row items-start md:items-center w-full gap-8 md:gap-16 group"
                 >
-                  {/* Número grande */}
                   <div
                     className={`absolute top-0 md:top-1/2 md:-translate-y-1/2 text-[100px] md:text-[250px] font-syne font-bold text-stone-200/60 z-[-1] pointer-events-none ${
                       isEven ? "left-0" : "right-0"
@@ -150,7 +142,6 @@ export default function Section2() {
                     0{fase.num}
                   </div>
 
-                  {/* Texto */}
                   <div
                     className={`w-full md:w-1/2 flex flex-col ${
                       isEven
@@ -171,7 +162,6 @@ export default function Section2() {
                     </p>
                   </div>
 
-                  {/* Imagen */}
                   <div
                     className={`w-full md:w-1/2 mt-4 md:mt-0 ${
                       isEven ? "" : "md:order-1"
@@ -180,14 +170,13 @@ export default function Section2() {
                     <div
                       className={`w-full max-w-sm aspect-[4/5] bg-stone-100 relative overflow-hidden shadow-xl border-4 border-white ${fase.imgMargin}`}
                     >
-                      {/* Implementación de la Imagen con Next/Image */}
                       <Image 
                         src={fase.imgSrc}
                         alt={`Representación de la Fase ${fase.num}: ${fase.titulo}`}
                         fill
+                        sizes="(max-width: 768px) 100vw, 384px" // <-- AÑADIDO: Propiedad sizes
                         className="object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.5s] ease-out"
                       />
-                      {/* Overlay sutil para no perder contraste */}
                       <div className="absolute inset-0 bg-stone-900/10 pointer-events-none transition-opacity duration-700 group-hover:opacity-0"></div>
                     </div>
                   </div>
