@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import Image from "next/image"; // Importamos Image de Next.js
 
 export default function Section2() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,24 +40,28 @@ export default function Section2() {
   const scale = useTransform(smoothProgress, [0, 0.5, 1], [0.8, 1.2, 0.8]);
   const rotate = useTransform(smoothProgress, [0, 1], [0, 180]);
 
+  // Modificamos las fases para incluir la ruta a las imágenes
   const fases = [
     {
       num: "1",
       titulo: "Consulta Inicial",
       desc: "Nos reuniremos, y así podré entender tu visión, y con mi ayuda volverla realidad.",
       imgMargin: "md:ml-auto",
+      imgSrc: "/inicio/1.jpg", // Ruta a tu primera imagen
     },
     {
       num: "2",
       titulo: "Planificación y Diseño",
       desc: "Desarrollaremos el concepto creativo, y toda la logística técnica de tu evento.",
       imgMargin: "md:mr-auto",
+      imgSrc: "/inicio/2.jpg", // Ruta a tu segunda imagen
     },
     {
       num: "3",
       titulo: "Coordinación del Evento",
       desc: "Gestión total del evento, para que tú solo te dediques a disfrutar de ese día inolvidable.",
       imgMargin: "md:ml-auto",
+      imgSrc: "/inicio/3.jpg", // Ruta a tu tercera imagen
     },
   ];
 
@@ -112,9 +117,7 @@ export default function Section2() {
             className="md:hidden absolute left-[4.5rem] w-12 h-12 -ml-6 z-50 pointer-events-none flex items-center justify-center will-change-transform"
             style={{ top: topPosition, x: xMobile, scale, rotate }}
           >
-            {/* Diamante central */}
             <div className="w-4 h-4 rotate-45 bg-stone-800 border-2 border-stone-100 shadow-md"></div>
-            {/* Halo sutil */}
             <div className="absolute inset-0 border border-stone-400/30 rotate-45 rounded-sm"></div>
           </motion.div>
 
@@ -123,9 +126,7 @@ export default function Section2() {
             className="hidden md:flex absolute left-1/2 w-16 h-16 -ml-8 z-50 pointer-events-none items-center justify-center will-change-transform"
             style={{ top: topPosition, x: xDesktop, scale, rotate }}
           >
-            {/* Diamante central */}
             <div className="w-5 h-5 rotate-45 bg-stone-800 border-2 border-stone-100 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"></div>
-            {/* Halo sutil */}
             <div className="absolute w-10 h-10 border border-stone-400/40 rotate-45 rounded-sm"></div>
           </motion.div>
 
@@ -137,7 +138,8 @@ export default function Section2() {
               return (
                 <div
                   key={fase.num}
-                  className="relative flex flex-col md:flex-row items-start md:items-center w-full gap-8 md:gap-16"
+                  // Añadimos 'group' aquí para que el hover funcione sobre toda la fila
+                  className="relative flex flex-col md:flex-row items-start md:items-center w-full gap-8 md:gap-16 group"
                 >
                   {/* Número grande */}
                   <div
@@ -176,13 +178,17 @@ export default function Section2() {
                     }`}
                   >
                     <div
-                      className={`w-full max-w-sm aspect-[4/5] bg-stone-100 relative overflow-hidden shadow-xl border border-stone-100 ${fase.imgMargin}`}
+                      className={`w-full max-w-sm aspect-[4/5] bg-stone-100 relative overflow-hidden shadow-xl border-4 border-white ${fase.imgMargin}`}
                     >
-                      <div className="absolute inset-0 flex items-center justify-center m-4 border border-dashed border-stone-300 opacity-60">
-                        <span className="font-outfit text-stone-400 tracking-widest text-xs md:text-sm uppercase text-center px-4">
-                          Foto {fase.titulo}
-                        </span>
-                      </div>
+                      {/* Implementación de la Imagen con Next/Image */}
+                      <Image 
+                        src={fase.imgSrc}
+                        alt={`Representación de la Fase ${fase.num}: ${fase.titulo}`}
+                        fill
+                        className="object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.5s] ease-out"
+                      />
+                      {/* Overlay sutil para no perder contraste */}
+                      <div className="absolute inset-0 bg-stone-900/10 pointer-events-none transition-opacity duration-700 group-hover:opacity-0"></div>
                     </div>
                   </div>
                 </div>
