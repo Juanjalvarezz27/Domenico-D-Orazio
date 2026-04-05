@@ -47,21 +47,21 @@ export default function Section2() {
       titulo: "Consulta Inicial",
       desc: "Nos reuniremos, y así podré entender tu visión, y con mi ayuda volverla realidad.",
       imgMargin: "md:ml-auto",
-      imgSrc: "/inicio/1.jpg", // Ruta a tu primera imagen
+      imgSrc: "/Inicio/1.jpg", // Ruta a tu primera imagen
     },
     {
       num: "2",
       titulo: "Planificación y Diseño",
       desc: "Desarrollaremos el concepto creativo, y toda la logística técnica de tu evento.",
       imgMargin: "md:mr-auto",
-      imgSrc: "/inicio/2.jpg", // Ruta a tu segunda imagen
+      imgSrc: "/Inicio/2.jpg", // Ruta a tu segunda imagen
     },
     {
       num: "3",
       titulo: "Coordinación del Evento",
       desc: "Gestión total del evento, para que tú solo te dediques a disfrutar de ese día inolvidable.",
       imgMargin: "md:ml-auto",
-      imgSrc: "/inicio/3.jpg", // Ruta a tu tercera imagen
+      imgSrc: "/Inicio/3.jpg", // Ruta a tu tercera imagen
     },
   ];
 
