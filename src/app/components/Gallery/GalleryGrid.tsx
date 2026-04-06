@@ -6,7 +6,7 @@ import Image from "next/image";
 const projects = [
   { id: 1, title: "Boda Costa Amalfi", category: "Weddings", aspect: "aspect-[3/4]", span: "md:col-span-4 md:row-span-2", imgSrc: "/gallery/1.jpg" },
   { id: 2, title: "Gala Corporativa Nexus", category: "Corporate", aspect: "aspect-square", span: "md:col-span-4 md:row-span-1", imgSrc: "/gallery/2.jpg" },
-  { id: 3, title: "XV Años Siena", category: "Social", aspect: "aspect-[4/3]", span: "md:col-span-4 md:row-span-1", imgSrc: "/gallery/3.jpg" },
+  { id: 3, title: "XV Años Siena", category: "Social", aspect: "aspect-[4/3]", span: "md:col-span-4 md:row-span-1", imgSrc: "/gallery/A3.jpg" },
   { id: 4, title: "Lanzamiento Aura", category: "Corporate", aspect: "aspect-[4/3]", span: "md:col-span-8 md:row-span-2", imgSrc: "/gallery/4.jpg" },
   { id: 5, title: "Boda Villa Momboy", category: "Weddings", aspect: "aspect-[3/4]", span: "md:col-span-4 md:row-span-2", imgSrc: "/gallery/5.jpg" },
   { id: 6, title: "Bautizo Laurent", category: "Social", aspect: "aspect-square", span: "md:col-span-4 md:row-span-1", imgSrc: "/gallery/6.jpg" },
