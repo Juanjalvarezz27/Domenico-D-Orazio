@@ -29,7 +29,7 @@ const services = [
     desc: "Eventos privados exclusivos y fiestas temáticas de alto nivel. 15 años, bautizos y comuniones diseñados bajo una narrativa sensorial única.",
     tag: "SOCIAL",
     imgTags: ["Celebración", "Atmosfera", "Diseño"],
-    images: ["/servicios/4.jpg", "/servicios/5.jpg", "/servicios/AA6.jpg"]
+    images: ["/servicios/4.jpg", "/servicios/5.jpg", "/servicios/diseno.jpg"]
   },
   {
     title: "Corporate Events",
@@ -37,7 +37,7 @@ const services = [
     desc: "Producción de eventos de marca, lanzamientos de productos y activaciones comerciales que conectan con la audiencia a través del neuromarketing.",
     tag: "CORPORATE",
     imgTags: ["Lanzamiento", "Activación", "Marca"],
-    images: ["/Lanzamiento.png", "/servicios/8.jpg", "/servicios/A9.jpg"] 
+    images: ["/Lanzamiento.png", "/servicios/person.jpg", "/servicios/9.jpg"] 
   }
 ];
 
