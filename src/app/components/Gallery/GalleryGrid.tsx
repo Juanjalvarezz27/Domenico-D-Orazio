@@ -1,22 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
-// Simulamos los proyectos con diferentes proporciones (aspect ratios)
 const projects = [
-  { id: 1, title: "Boda Costa Amalfi", category: "Weddings", aspect: "aspect-[3/4]", span: "md:col-span-4 md:row-span-2" },
-  { id: 2, title: "Gala Corporativa Nexus", category: "Corporate", aspect: "aspect-square", span: "md:col-span-4 md:row-span-1" },
-  { id: 3, title: "XV Años Siena", category: "Social", aspect: "aspect-[4/3]", span: "md:col-span-4 md:row-span-1" },
-  { id: 4, title: "Lanzamiento Aura", category: "Corporate", aspect: "aspect-[4/3]", span: "md:col-span-8 md:row-span-2" },
-  { id: 5, title: "Boda Villa Momboy", category: "Weddings", aspect: "aspect-[3/4]", span: "md:col-span-4 md:row-span-2" },
-  { id: 6, title: "Bautizo Laurent", category: "Social", aspect: "aspect-square", span: "md:col-span-4 md:row-span-1" },
-  // AÑADIDA: Imagen 7 para cerrar el hueco de la cuadrícula
-  { id: 7, title: "Editorial Novias", category: "Weddings", aspect: "aspect-[4/3]", span: "md:col-span-4 md:row-span-1" },
+  { id: 1, title: "Boda Costa Amalfi", category: "Weddings", aspect: "aspect-[3/4]", span: "md:col-span-4 md:row-span-2", imgSrc: "/gallery/1.jpg" },
+  { id: 2, title: "Gala Corporativa Nexus", category: "Corporate", aspect: "aspect-square", span: "md:col-span-4 md:row-span-1", imgSrc: "/gallery/2.jpg" },
+  { id: 3, title: "XV Años Siena", category: "Social", aspect: "aspect-[4/3]", span: "md:col-span-4 md:row-span-1", imgSrc: "/gallery/3.jpg" },
+  { id: 4, title: "Lanzamiento Aura", category: "Corporate", aspect: "aspect-[4/3]", span: "md:col-span-8 md:row-span-2", imgSrc: "/gallery/4.jpg" },
+  { id: 5, title: "Boda Villa Momboy", category: "Weddings", aspect: "aspect-[3/4]", span: "md:col-span-4 md:row-span-2", imgSrc: "/gallery/5.jpg" },
+  { id: 6, title: "Bautizo Laurent", category: "Social", aspect: "aspect-square", span: "md:col-span-4 md:row-span-1", imgSrc: "/gallery/6.jpg" },
+  { id: 7, title: "Editorial Novias", category: "Weddings", aspect: "aspect-[4/3]", span: "md:col-span-4 md:row-span-1", imgSrc: "/gallery/7.jpg" },
 ];
 
 export default function GalleryGrid() {
   return (
-    <section className="w-full py-10 md:py-20 bg-neutral-950">
+    // CORRECCIÓN 1: Agregado 'relative' al section para quitar el error de Framer Motion y mejorar el rendimiento
+    <section className="relative w-full py-10 md:py-20 bg-neutral-950">
       <div className="max-w-[90rem] mx-auto px-4 md:px-6">
         
         {/* Cuadrícula Asimétrica */}
@@ -28,26 +28,37 @@ export default function GalleryGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
-              className={`relative group overflow-hidden bg-neutral-900 cursor-pointer ${project.span} ${project.aspect} w-full h-full`}
+              className={`relative group overflow-hidden bg-neutral-900 cursor-pointer ${project.span} ${project.aspect} w-full h-full transform-gpu`}
             >
-              {/* Imagen Placeholder (Fondo) */}
-              <div className="absolute inset-0 bg-neutral-900 border border-neutral-800 group-hover:scale-105 transition-transform duration-[1.5s] ease-out flex items-center justify-center">
-                {/* Textura de rayas para el placeholder */}
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/pinstripe.png')] opacity-[0.05]"></div>
-                <span className="font-syne text-neutral-700 text-xs tracking-widest uppercase italic text-center px-4">
-                  {project.category} Image
-                </span>
+              
+              {/* Contenedor de la Imagen con Efecto Hover */}
+              <div className="absolute inset-0 transition-transform duration-[1.5s] ease-out group-hover:scale-105">
+                <Image 
+                  src={project.imgSrc}
+                  alt={`Proyecto: ${project.title}`}
+                  fill
+                  sizes={
+                    project.span.includes('col-span-8') 
+                      ? "(max-width: 768px) 100vw, 66vw" 
+                      : "(max-width: 768px) 100vw, 33vw"
+                  }
+                  className="object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
               </div>
 
-              {/* Overlay Oscuro en Hover */}
-              <div className="absolute inset-0 bg-neutral-950/0 group-hover:bg-neutral-950/60 transition-colors duration-500 z-10" />
+              {/* CORRECCIÓN 2: Capas de Overlay Mejoradas */}
+              {/* Capa base muy sutil constante */}
+              <div className="absolute inset-0 bg-neutral-950/10 z-10 pointer-events-none" />
+              
+              {/* Capa de Gradiente en Hover: Oscurece solo abajo para el texto, deja la foto brillante arriba */}
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
 
               {/* Textos Revelados en Hover */}
               <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
-                <span className="font-outfit text-stone-400 text-[10px] tracking-[0.3em] uppercase mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <span className="font-outfit text-stone-300 text-[10px] tracking-[0.3em] uppercase mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   {project.category}
                 </span>
-                <h3 className="font-syne text-xl md:text-3xl text-stone-100 tracking-tight transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                <h3 className="font-syne text-xl md:text-3xl text-white tracking-tight transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
                   {project.title}
                 </h3>
               </div>
