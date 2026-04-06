@@ -37,7 +37,7 @@ const services = [
     desc: "Producción de eventos de marca, lanzamientos de productos y activaciones comerciales que conectan con la audiencia a través del neuromarketing.",
     tag: "CORPORATE",
     imgTags: ["Lanzamiento", "Activación", "Marca"],
-    images: ["/Lanzamiento.png", "/servicios/person.jpg", "/servicios/9.jpg"] 
+    images: ["/Lanzamiento.png", "/servicios/event.jpg", "/servicios/9.jpg"] 
   }
 ];
 
