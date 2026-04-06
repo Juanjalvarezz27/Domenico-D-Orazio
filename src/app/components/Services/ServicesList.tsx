@@ -21,7 +21,7 @@ const services = [
     desc: "Especialización en bodas de playa, ciudad y destino. Nos encargamos de cada detalle, desde la permisología legal hasta la curaduría estética, garantizando una ejecución impecable.",
     tag: "WEDDINGS",
     imgTags: ["Ceremonia", "Detalles", "Recepción"],
-    images: [null, null, null] 
+    images: ["/servicios/1.jpg", "/servicios/2.jpg", "/servicios/3.jpg"] 
   },
   {
     title: "Social Celebrations",
@@ -29,7 +29,7 @@ const services = [
     desc: "Eventos privados exclusivos y fiestas temáticas de alto nivel. 15 años, bautizos y comuniones diseñados bajo una narrativa sensorial única.",
     tag: "SOCIAL",
     imgTags: ["Celebración", "Atmosfera", "Diseño"],
-    images: [null, null, null]
+    images: ["/servicios/4.jpg", "/servicios/5.jpg", "/servicios/6.jpg"]
   },
   {
     title: "Corporate Events",
@@ -37,7 +37,7 @@ const services = [
     desc: "Producción de eventos de marca, lanzamientos de productos y activaciones comerciales que conectan con la audiencia a través del neuromarketing.",
     tag: "CORPORATE",
     imgTags: ["Lanzamiento", "Activación", "Marca"],
-    images: ["/Lanzamiento.png", null, null] 
+    images: ["/Lanzamiento.png", "/servicios/8.jpg", "/servicios/9.jpg"] 
   }
 ];
 
@@ -45,9 +45,9 @@ export default function ServicesList() {
   const [mounted, setMounted] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
 
-  // Generación ULTRA MASIVA de partículas para textura profunda
   useEffect(() => {
-    const generated = Array.from({ length: 350 }).map((_, i) => {
+    // OPTIMIZACIÓN: Reducimos de 350 a 100 partículas.
+    const generated = Array.from({ length: 100 }).map((_, i) => {
       const sizeClass = Math.random();
       const baseSize = sizeClass > 0.8 ? 2.5 : sizeClass > 0.4 ? 1.5 : 0.8;
       
@@ -68,12 +68,14 @@ export default function ServicesList() {
   return (
     <section className="relative w-full py-24 md:py-40 bg-stone-50 overflow-hidden antialiased border-t border-stone-200/50">
       
-      {/* --- FONDO CON TORMENTA DE PARTÍCULAS NEGRAS --- */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* --- FONDO CON TORMENTA DE PARTÍCULAS --- */}
+      {/* OPTIMIZACIÓN: Añadimos transform-gpu para mejorar rendimiento */}
+      <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
         {mounted && particles.map((p) => (
           <motion.div
             key={p.id}
-            className="absolute bg-neutral-900 rounded-full"
+            // OPTIMIZACIÓN: Añadido will-change-transform
+            className="absolute bg-neutral-900 rounded-full will-change-transform"
             style={{ 
               width: p.size, 
               height: p.size, 
@@ -109,7 +111,8 @@ export default function ServicesList() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center lg:items-start gap-16 lg:gap-24 group`}
+                // OPTIMIZACIÓN: Añadido will-change-transform al contenedor principal de cada servicio
+                className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center lg:items-start gap-16 lg:gap-24 group will-change-transform`}
               >
                 
                 {/* --- BLOQUE DE TEXTO --- */}
@@ -154,7 +157,6 @@ export default function ServicesList() {
                     {/* Imagen Principal (Índice 0) */}
                     <motion.div 
                       whileHover={{ scale: 0.98 }}
-                      // CORRECCIÓN APLICADA AQUÍ: aspect-[4/5] para móvil, lg:aspect-[3/4] para escritorio
                       className="col-span-2 lg:col-span-1 lg:row-span-2 relative aspect-[4/5] lg:aspect-[3/4] bg-white border border-stone-200 overflow-hidden shadow-md flex items-center justify-center group/img"
                     >
                       {service.images[0] ? (
@@ -162,7 +164,9 @@ export default function ServicesList() {
                           src={service.images[0]} 
                           alt={service.imgTags[0]} 
                           fill 
-                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700" 
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          // OPTIMIZACIÓN: Se agregó transform-gpu
+                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700 transform-gpu" 
                         />
                       ) : (
                         <>
@@ -184,7 +188,8 @@ export default function ServicesList() {
                           src={service.images[1]} 
                           alt={service.imgTags[1]} 
                           fill 
-                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700" 
+                          sizes="(max-width: 1024px) 50vw, 25vw"
+                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700 transform-gpu" 
                         />
                       ) : (
                         <span className="font-syne text-stone-500 text-[10px] tracking-[0.2em] uppercase italic text-center px-2">
@@ -203,7 +208,8 @@ export default function ServicesList() {
                           src={service.images[2]} 
                           alt={service.imgTags[2]} 
                           fill 
-                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700" 
+                          sizes="(max-width: 1024px) 50vw, 25vw"
+                          className="object-cover object-center grayscale group-hover/img:grayscale-0 transition-all duration-700 transform-gpu" 
                         />
                       ) : (
                         <span className="font-syne text-stone-500 text-[10px] tracking-[0.2em] uppercase italic text-center px-2">
