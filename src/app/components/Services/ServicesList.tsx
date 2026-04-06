@@ -29,7 +29,7 @@ const services = [
     desc: "Eventos privados exclusivos y fiestas temáticas de alto nivel. 15 años, bautizos y comuniones diseñados bajo una narrativa sensorial única.",
     tag: "SOCIAL",
     imgTags: ["Celebración", "Atmosfera", "Diseño"],
-    images: ["/servicios/4.jpg", "/servicios/5.jpg", "/servicios/A6.jpg"]
+    images: ["/servicios/4.jpg", "/servicios/5.jpg", "/servicios/AA6.jpg"]
   },
   {
     title: "Corporate Events",
