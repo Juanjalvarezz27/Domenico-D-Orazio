@@ -2,6 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
+import Image from "next/image"; // IMPORTANTE: Importamos Next Image
 
 // Definimos la estructura de la partícula
 interface Particle {
@@ -96,15 +97,18 @@ export default function SobreMiHero() {
         {/* --- LAYOUT: FOTO + TEXTO --- */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 mb-16 w-full">
           
-          {/* FOTO CIRCULAR */}
+          {/* FOTO CIRCULAR ACTUALIZADA CON NEXT/IMAGE */}
           <motion.div 
             variants={itemVariants}
-            className="w-56 h-56 md:w-[320px] md:h-[320px] rounded-full border border-stone-200 bg-white shadow-sm flex items-center justify-center overflow-hidden relative shrink-0"
+            className="w-56 h-56 md:w-[320px] md:h-[320px] rounded-full border border-stone-200 bg-stone-100 shadow-md flex items-center justify-center overflow-hidden relative shrink-0 group"
           >
-            <div className="absolute inset-0 bg-stone-100 opacity-40"></div>
-            <span className="font-syne text-stone-300 text-[10px] md:text-xs tracking-[0.3em] uppercase italic text-center p-8 z-10">
-              Domenico <br /> Foto
-            </span>
+            <Image 
+              src="/retrato/A1.jpg" 
+              alt="Retrato de Domenico D'Orazio"
+              fill
+              sizes="(max-width: 768px) 224px, 320px"
+              className="object-cover object-center transition-all duration-700 hover:scale-105"
+            />
           </motion.div>
 
           {/* TEXTO DE MARCA CON SYNCOPATE */}
