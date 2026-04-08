@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function ContactInfo() {
   const contactLinks = [
@@ -31,9 +32,60 @@ export default function ContactInfo() {
   ];
 
   return (
-    <section className="relative w-full py-8 md:py-8 px-4 md:px-8 bg-stone-50 overflow-hidden">
+    <section className="relative w-full py-16 md:py-24 px-4 md:px-8 bg-stone-50 overflow-hidden">
       <div className="max-w-6xl mx-auto w-full">
         
+        {/* --- SECCIÓN SUPERIOR: FOTO A LA IZQ + LLAMADO A LA ACCIÓN --- */}
+        {/* flex-col para móvil, md:flex-row para PC (Foto a la izquierda) */}
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-10 md:gap-16 lg:gap-20 mb-20 md:mb-28 max-w-5xl mx-auto">
+          
+          {/* FOTO RECTANGULAR (A color, Alta Calidad y a la Izquierda) */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-[260px] h-[340px] md:w-[320px] md:h-[420px] lg:w-[360px] lg:h-[480px] overflow-hidden shadow-xl border-4 border-white shrink-0 group"
+          >
+            <Image 
+              src="/retrato/3.jpg" 
+              alt="Domenico D'Orazio - Diseñador de Eventos"
+              fill
+              // FORZAMOS ALTA CALIDAD
+              quality={95}
+              sizes="(max-width: 768px) 500px, 800px"
+              // SIN GRAYSCALE, se mantiene el color original
+              className="object-cover object-center transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+            />
+          </motion.div>
+
+          {/* Textos de Cierre / Contacto */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center md:text-left flex flex-col items-center md:items-start w-full"
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="h-[1px] w-8 md:w-12 bg-stone-400"></div>
+              <span className="font-outfit text-stone-600 font-medium text-[10px] md:text-xs tracking-[0.4em] uppercase">
+                Inicia tu proyecto
+              </span>
+            </div>
+
+            <h2 className="font-syne text-4xl sm:text-5xl md:text-5xl lg:text-7xl text-stone-900 font-bold tracking-tighter mb-6 leading-[1.1]">
+              CREEMOS ALGO <br className="hidden lg:block" />
+              <span className="italic font-light text-stone-400">EXCEPCIONAL</span>
+            </h2>
+            
+            <p className="font-outfit text-stone-500 text-base md:text-lg lg:text-xl font-light tracking-wide leading-relaxed max-w-md">
+              Tu evento merece ser una experiencia multisensorial. Hablemos de tus ideas y diseñemos un momento que trascienda en el tiempo.
+            </p>
+          </motion.div>
+        </div>
+
+
         {/* --- EL DIRECTORIO CENTRADO --- */}
         <motion.div 
           initial={{ opacity: 0 }}
@@ -55,7 +107,6 @@ export default function ContactInfo() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              // Hover group con transición suave en el borde
               className="group relative flex flex-col md:flex-row md:items-center justify-between py-6 md:py-10 border-b border-stone-200 hover:border-stone-500 transition-colors duration-500 w-full"
             >
               {/* Lado Izquierdo: Número y Etiqueta */}
@@ -74,7 +125,7 @@ export default function ContactInfo() {
                   {link.value}
                 </span>
                 
-                {/* Flecha SVG minimalista: Aparece y se desliza en hover */}
+                {/* Flecha SVG minimalista */}
                 <div className="w-6 h-6 overflow-hidden relative flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out flex-shrink-0">
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-stone-800">
                     <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="1.2" strokeLinecap="square" strokeLinejoin="miter"/>
@@ -91,10 +142,9 @@ export default function ContactInfo() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          // Fondo más elegante con bordes refinados
-          className="mt-12 md:mt-20 relative w-full overflow-hidden bg-white/50 backdrop-blur-sm border border-stone-200/60 flex flex-col items-center justify-center text-center py-20 md:py-32 shadow-sm rounded-sm"
+          className="mt-16 md:mt-24 relative w-full overflow-hidden bg-white/50 backdrop-blur-sm border border-stone-200/60 flex flex-col items-center justify-center text-center py-20 md:py-32 shadow-sm rounded-sm"
         >
-          {/* Marca de agua de fondo gigante - Ajustada para no desbordar (overflow-hidden en el padre) */}
+          {/* Marca de agua de fondo gigante */}
           <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none select-none">
             <span className="font-syne text-[8rem] sm:text-[12rem] md:text-[16rem] lg:text-[20rem] font-bold tracking-tighter leading-none whitespace-nowrap text-stone-900">
               VENEZUELA
